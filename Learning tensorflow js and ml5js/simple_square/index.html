@@ -1,0 +1,45 @@
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Neural Network</title>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/p5.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/addons/p5.dom.min.js"></script>
+  <script src="https://unpkg.com/ml5@0.4.1/dist/ml5.min.js"></script>
+</head>
+
+<body>
+  <h1>Neural Network</h1>
+  <script >
+	  	const options = {
+	  inputs: 1,
+	  outputs: 1,
+	  type:'regression',
+	  activationHidden: 'relu',
+	  debug: true,
+	  learningRate: 0.001,
+	  hiddenUnits: 10,
+	  epochs: 10
+	}
+  	const neuralNetwork = ml5.neuralNetwork(options);
+  	for(let i = 0; i < 100; i+=1){
+    const x = i;
+    const y = i ** 2;
+    neuralNetwork.data.addData( [x], [y])
+	}
+
+	neuralNetwork.data.normalize();
+	neuralNetwork.train(finishedTraining);
+
+	
+	function finishedTraining(){
+    neuralNetwork.predict( [10], (err, results) => {
+        console.log(results);
+    })
+	}
+
+  </script>
+</body>
+
+</html>
